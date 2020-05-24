@@ -31,6 +31,8 @@
 
 package com.toy.anagrams.lib;
 
+import java.util.*;
+
 /**
  * Implementation of the logic for the Anagram Game application.
  */
@@ -87,57 +89,26 @@ final class StaticWordLibrary extends WordLibrary {
         "unsigned",
         "traditional"};
 
-    private static final String[] SCRAMBLED_WORD_LIST = {
-        //単語追加
-    	"zaimgan",
-    	"vlmorusae",
-    		
-        "batsartcoin",
-        "maibuguos",
-        "ratimhteci",
-        "abkclssha",
-        "ibmtpa",
-        "iccrmutsnaec",
-        "ocbmnitaoni",
-        "ocsnqeeutnyl",
-        "ocsnroitmu",
-        "edrcmeneitgn",
-        "edepdnneyc",
-        "idasbmgiauet",
-        "ydanicm",
-        "neacsplutaoni",
-        "qeiuaveltn",
-        "xerpseisno",
-        "aficilatet",
-        "rfgaemtn",
-        "ehaxedicalm",
-        "milpmeneatitno",
-        "niidtsniugsiahleb",
-        "niehiratcen",
-        "nietnret",
-        "ajav",
-        "olacilazitno",
-        "imrcpoorecssro",
-        "anivagitno",
-        "poitimazitno",
-        "aparemert",
-        "aprtcki",
-        "ipkcel",
-        "opylomprich",
-        "irogorsuyl",
-        "isumtlnaoesuyl",
-        "psceficitaoni",
-        "tsurtcreu",
-        "elixalc",
-        "ilekiwse",
-        "amanegemtn",
-        "aminupalet",
-        "amhtmetacsi",
-        "ohjtvaa",
-        "evtrxe",
-        "nuisngde",
-        "rtdatioialn"
-    };
+    public static String scrambeleWord(int idx) {
+    	String word = WORD_LIST[idx];
+    	List<String> original_word = new ArrayList<String>();
+		for (int i=0; i < word.length(); i++) {
+			original_word.add(word.substring(i,i+1));
+		}
+    	List<String> scrambeled_word = new ArrayList<String>();
+    	Random rand = new Random();
+    	for (int i=0; i < word.length(); i++) {
+			int index = rand.nextInt(original_word.size());
+			String str = original_word.get(index);
+			scrambeled_word.add(str);
+			original_word.remove(index);
+    	}
+    	StringBuilder sb = new StringBuilder();
+		for (int i=0; i < scrambeled_word.size(); i++) {
+			sb.append(scrambeled_word.get(i));
+		}
+		return sb.toString();
+    }
     
     final static WordLibrary DEFAULT = new StaticWordLibrary();
 
@@ -162,7 +133,7 @@ final class StaticWordLibrary extends WordLibrary {
      * @return word at that index in its scrambled form
      */
     public String getScrambledWord(int idx) {
-        return SCRAMBLED_WORD_LIST[idx];
+        return scrambeleWord(idx);
     }
 
     /**
