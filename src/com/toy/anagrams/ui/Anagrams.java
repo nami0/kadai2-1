@@ -203,10 +203,26 @@ public class Anagrams extends JFrame {
         nextTrial.setText("新しい問題");
         nextTrial.setToolTipText("Fetch a new word.");
         nextTrial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextTrialActionPerformed(evt);
-            }
+        	int countNum2 = 1;int countNum3 = 1;
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+        		if(selectLevel.getSelectedItem().equals("レベル 1")) {
+        		nextTrialActionPerformed(evt);
+        		}
+        		else if(selectLevel.getSelectedItem().equals("レベル 2")) {
+        			if(countNum2 <= 10) {
+        			nextTrialActionPerformed(evt);
+                    countNum2 = countNum2 + 1;
+        			}
+        		}
+        		else if(selectLevel.getSelectedItem().equals("レベル 3")) {
+        			if(countNum3 <= 5) {
+        			nextTrialActionPerformed(evt);
+                    countNum3 = countNum3 + 1;
+        			}
+        		 }
+        	}
         });
+
         buttonsPanel.add(nextTrial, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
