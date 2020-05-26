@@ -189,7 +189,8 @@ public class Anagrams extends JFrame {
         guessButton.setMnemonic('解');
         //guessButton.setText("Guess");
         guessButton.setText("解答する");
-        guessButton.setToolTipText("Guess the scrambled word.");
+        //ツールチップを日本語にする
+        guessButton.setToolTipText("答え合わせをする");
         guessButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guessedWordActionPerformed(evt);
@@ -201,7 +202,8 @@ public class Anagrams extends JFrame {
         nextTrial.setMnemonic('新');
         //nextTrial.setText("New Word");
         nextTrial.setText("新しい問題");
-        nextTrial.setToolTipText("Fetch a new word.");
+        //ツールチップを日本語にする
+        nextTrial.setToolTipText("次の問題を出す");
         nextTrial.addActionListener(new java.awt.event.ActionListener() {
         	int countNum2 = 1;int countNum3 = 1;
         	public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,8 +261,8 @@ public class Anagrams extends JFrame {
         aboutMenuItem.setMnemonic('ア');
         //aboutMenuItem.setText("About");
         aboutMenuItem.setText("アバウト");
-        //aboutMenuItem.setToolTipText("About");
-        aboutMenuItem.setToolTipText("アバウト");
+        //ツールチップを日本語にする
+        aboutMenuItem.setToolTipText("プログラムの詳細");
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aboutMenuItemActionPerformed(evt);
@@ -272,7 +274,8 @@ public class Anagrams extends JFrame {
         exitMenuItem.setMnemonic('出');
         //exitMenuItem.setText("Exit");
         exitMenuItem.setText("出口");
-        exitMenuItem.setToolTipText("Quit Team, Quit!");
+        //ツールチップを日本語にする
+        exitMenuItem.setToolTipText("プログラムを閉じる");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitMenuItemActionPerformed(evt);
