@@ -114,6 +114,7 @@ public class Anagrams extends JFrame {
         buttonsPanel = new javax.swing.JPanel();
         guessButton = new javax.swing.JButton();
         nextTrial = new javax.swing.JButton();
+        viewAnswer = new javax.swing.JButton();
         levelLabel = new javax.swing.JLabel();
         selectLevel = new javax.swing.JComboBox();
         mainMenu = new javax.swing.JMenuBar();
@@ -225,8 +226,20 @@ public class Anagrams extends JFrame {
         	}
         });
 
+        
         buttonsPanel.add(nextTrial, new java.awt.GridBagConstraints());
 
+      //答えを見る
+        viewAnswer.setMnemonic('答');
+        viewAnswer.setText("解答");
+        viewAnswer.setToolTipText("答えを見る");
+        viewAnswer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	viewAnswerActionPerformed(evt);
+            }
+        });
+        buttonsPanel.add(viewAnswer, new java.awt.GridBagConstraints());
+        
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -321,6 +334,12 @@ public class Anagrams extends JFrame {
         guessedWord.requestFocusInWindow();
     }//GEN-LAST:event_guessedWordActionPerformed
 
+  //答えを見る
+    private void viewAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessedWordActionPerformed
+    	feedbackLabel.setText(wordLibrary.getWord(wordIdx));
+        guessedWord.requestFocusInWindow();
+    }
+    
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
         System.exit(0);
     }//GEN-LAST:event_exitForm
@@ -341,6 +360,7 @@ public class Anagrams extends JFrame {
     private javax.swing.JLabel scrambledLabel;
     private javax.swing.JTextField scrambledWord;
     private javax.swing.JComboBox selectLevel;
+    private javax.swing.JButton viewAnswer;
     // End of variables declaration//GEN-END:variables
 
 }
