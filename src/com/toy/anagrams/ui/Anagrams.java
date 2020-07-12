@@ -110,6 +110,7 @@ public class Anagrams extends JFrame {
         scrambledWord = new javax.swing.JTextField();
         guessLabel = new javax.swing.JLabel();
         guessedWord = new javax.swing.JTextField();
+        feedbackAnswerLabel = new javax.swing.JLabel();
         feedbackLabel = new javax.swing.JLabel();
         buttonsPanel = new javax.swing.JPanel();
         guessButton = new javax.swing.JButton();
@@ -152,7 +153,7 @@ public class Anagrams extends JFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 12, 0);
         mainPanel.add(scrambledWord, gridBagConstraints);
-
+        
         //guessLabel.setDisplayedMnemonic('Y');
         guessLabel.setDisplayedMnemonic('あ');
         guessLabel.setLabelFor(guessedWord);
@@ -171,7 +172,18 @@ public class Anagrams extends JFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         mainPanel.add(guessedWord, gridBagConstraints);
-
+        
+        feedbackAnswerLabel.setText("正誤：");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.BELOW_BASELINE;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
+        mainPanel.add(feedbackAnswerLabel, gridBagConstraints);
+        
         //feedbackLabel.setText("aaaaaaaaaaaaaa");
         feedbackLabel.setText("ああああああああああああ");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -324,10 +336,12 @@ public class Anagrams extends JFrame {
         if (wordLibrary.isCorrect(wordIdx, guessedWord.getText())){
             //feedbackLabel.setText("Correct! Try a new word!");
             feedbackLabel.setText("正解！ 次の問題へ！");
+            feedbackAnswerLabel.setText(feedbackAnswerLabel.getText()+"○ ");
             getRootPane().setDefaultButton(nextTrial);
         } else {
             //feedbackLabel.setText("Incorrect! Try again!");
             feedbackLabel.setText("不正解！ もう一回やってみよう！");
+            feedbackAnswerLabel.setText(feedbackAnswerLabel.getText()+"× ");
             guessedWord.setText("");
         }
 
@@ -348,6 +362,7 @@ public class Anagrams extends JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.JLabel feedbackAnswerLabel;
     private javax.swing.JLabel feedbackLabel;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton guessButton;
