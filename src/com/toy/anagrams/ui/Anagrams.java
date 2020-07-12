@@ -111,6 +111,7 @@ public class Anagrams extends JFrame {
         scrambledWord = new javax.swing.JTextField();
         guessLabel = new javax.swing.JLabel();
         guessedWord = new javax.swing.JTextField();
+        decorationText = new javax.swing.JLabel();
         feedbackAnswerLabel = new javax.swing.JLabel();
         feedbackLabel = new javax.swing.JLabel();
         buttonsPanel = new javax.swing.JPanel();
@@ -173,6 +174,15 @@ public class Anagrams extends JFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         mainPanel.add(guessedWord, gridBagConstraints);
+
+        decorationText.setText("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(60, 0, 0, 0);
+        mainPanel.add(decorationText, gridBagConstraints);
+
 
         feedbackAnswerLabel.setText("正誤：");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -379,6 +389,7 @@ public class Anagrams extends JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JLabel feedbackAnswerLabel;
     private javax.swing.JLabel feedbackLabel;
+    private javax.swing.JLabel decorationText;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton guessButton;
     private javax.swing.JLabel guessLabel;
