@@ -79,6 +79,7 @@ public class Anagrams extends JFrame {
 
     private int wordIdx = 0;
     private WordLibrary wordLibrary;
+	private boolean seikai = false;
 
     /** Creates new form Anagrams */
     public Anagrams() {
@@ -153,7 +154,7 @@ public class Anagrams extends JFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 12, 0);
         mainPanel.add(scrambledWord, gridBagConstraints);
-        
+
         //guessLabel.setDisplayedMnemonic('Y');
         guessLabel.setDisplayedMnemonic('あ');
         guessLabel.setLabelFor(guessedWord);
@@ -172,7 +173,7 @@ public class Anagrams extends JFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         mainPanel.add(guessedWord, gridBagConstraints);
-        
+
         feedbackAnswerLabel.setText("正誤：");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -183,7 +184,7 @@ public class Anagrams extends JFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         mainPanel.add(feedbackAnswerLabel, gridBagConstraints);
-        
+
         //feedbackLabel.setText("aaaaaaaaaaaaaa");
         feedbackLabel.setText("ああああああああああああ");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -227,18 +228,30 @@ public class Anagrams extends JFrame {
         			if(countNum2 <= 10) {
         			nextTrialActionPerformed(evt);
                     countNum2 = countNum2 + 1;
+        			}else {
+        				if(seikai) {
+        				nextTrialActionPerformed(evt);
+        				countNum2 = 2;
+        				seikai = false;
+        				}
         			}
         		}
         		else if(selectLevel.getSelectedItem().equals("レベル 3")) {
         			if(countNum3 <= 5) {
         			nextTrialActionPerformed(evt);
                     countNum3 = countNum3 + 1;
+        			}else {
+        				if(seikai) {
+        				nextTrialActionPerformed(evt);
+        				countNum3 = 2;
+        				seikai = false;
+        				}
         			}
         		 }
         	}
         });
 
-        
+
         buttonsPanel.add(nextTrial, new java.awt.GridBagConstraints());
 
       //答えを見る
@@ -251,7 +264,7 @@ public class Anagrams extends JFrame {
             }
         });
         buttonsPanel.add(viewAnswer, new java.awt.GridBagConstraints());
-        
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -338,11 +351,13 @@ public class Anagrams extends JFrame {
             feedbackLabel.setText("正解！ 次の問題へ！");
             feedbackAnswerLabel.setText(feedbackAnswerLabel.getText()+"○ ");
             getRootPane().setDefaultButton(nextTrial);
+            seikai = true;
         } else {
             //feedbackLabel.setText("Incorrect! Try again!");
             feedbackLabel.setText("不正解！ もう一回やってみよう！");
             feedbackAnswerLabel.setText(feedbackAnswerLabel.getText()+"× ");
             guessedWord.setText("");
+            seikai = false;
         }
 
         guessedWord.requestFocusInWindow();
@@ -353,7 +368,7 @@ public class Anagrams extends JFrame {
     	feedbackLabel.setText(wordLibrary.getWord(wordIdx));
         guessedWord.requestFocusInWindow();
     }
-    
+
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
         System.exit(0);
     }//GEN-LAST:event_exitForm
