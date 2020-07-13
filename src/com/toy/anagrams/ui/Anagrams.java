@@ -79,6 +79,7 @@ public class Anagrams extends JFrame {
 
     private int wordIdx = 0;
     private WordLibrary wordLibrary;
+	private boolean seikai = false;
 
     /** Creates new form Anagrams */
     public Anagrams() {
@@ -110,6 +111,8 @@ public class Anagrams extends JFrame {
         scrambledWord = new javax.swing.JTextField();
         guessLabel = new javax.swing.JLabel();
         guessedWord = new javax.swing.JTextField();
+        decorationText = new javax.swing.JLabel();
+        feedbackAnswerLabel = new javax.swing.JLabel();
         feedbackLabel = new javax.swing.JLabel();
         buttonsPanel = new javax.swing.JPanel();
         guessButton = new javax.swing.JButton();
@@ -172,6 +175,26 @@ public class Anagrams extends JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         mainPanel.add(guessedWord, gridBagConstraints);
 
+        decorationText.setText("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(60, 0, 0, 0);
+        mainPanel.add(decorationText, gridBagConstraints);
+
+
+        feedbackAnswerLabel.setText("正誤：");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.BELOW_BASELINE;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
+        mainPanel.add(feedbackAnswerLabel, gridBagConstraints);
+
         //feedbackLabel.setText("aaaaaaaaaaaaaa");
         feedbackLabel.setText("ああああああああああああ");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -190,7 +213,8 @@ public class Anagrams extends JFrame {
         guessButton.setMnemonic('解');
         //guessButton.setText("Guess");
         guessButton.setText("解答する");
-        guessButton.setToolTipText("Guess the scrambled word.");
+        //ツールチップを日本語にする
+        guessButton.setToolTipText("答え合わせをする");
         guessButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guessedWordActionPerformed(evt);
@@ -202,25 +226,55 @@ public class Anagrams extends JFrame {
         nextTrial.setMnemonic('新');
         //nextTrial.setText("New Word");
         nextTrial.setText("新しい問題");
-        nextTrial.setToolTipText("Fetch a new word.");
+        //ツールチップを日本語にする
+        nextTrial.setToolTipText("次の問題を出す");
         nextTrial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextTrialActionPerformed(evt);
-            }
+        	int countNum2 = 1;int countNum3 = 1;
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+        		if(selectLevel.getSelectedItem().equals("レベル 1")) {
+        		nextTrialActionPerformed(evt);
+        		}
+        		else if(selectLevel.getSelectedItem().equals("レベル 2")) {
+        			if(countNum2 <= 10) {
+        			nextTrialActionPerformed(evt);
+                    countNum2 = countNum2 + 1;
+        			}else {
+        				if(seikai) {
+        				nextTrialActionPerformed(evt);
+        				countNum2 = 2;
+        				seikai = false;
+        				}
+        			}
+        		}
+        		else if(selectLevel.getSelectedItem().equals("レベル 3")) {
+        			if(countNum3 <= 5) {
+        			nextTrialActionPerformed(evt);
+                    countNum3 = countNum3 + 1;
+        			}else {
+        				if(seikai) {
+        				nextTrialActionPerformed(evt);
+        				countNum3 = 2;
+        				seikai = false;
+        				}
+        			}
+        		 }
+        	}
         });
+
+
         buttonsPanel.add(nextTrial, new java.awt.GridBagConstraints());
 
-        //答えを見る
+      //答えを見る
         viewAnswer.setMnemonic('答');
         viewAnswer.setText("解答");
-        viewAnswer.setToolTipText("view the answer.");
+        viewAnswer.setToolTipText("答えを見る");
         viewAnswer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	viewAnswerActionPerformed(evt);
             }
         });
         buttonsPanel.add(viewAnswer, new java.awt.GridBagConstraints());
-
+        
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -255,8 +309,8 @@ public class Anagrams extends JFrame {
         aboutMenuItem.setMnemonic('ア');
         //aboutMenuItem.setText("About");
         aboutMenuItem.setText("アバウト");
-        //aboutMenuItem.setToolTipText("About");
-        aboutMenuItem.setToolTipText("アバウト");
+        //ツールチップを日本語にする
+        aboutMenuItem.setToolTipText("プログラムの詳細");
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aboutMenuItemActionPerformed(evt);
@@ -268,12 +322,14 @@ public class Anagrams extends JFrame {
         exitMenuItem.setMnemonic('出');
         //exitMenuItem.setText("Exit");
         exitMenuItem.setText("出口");
-        exitMenuItem.setToolTipText("Quit Team, Quit!");
+        //ツールチップを日本語にする
+        exitMenuItem.setToolTipText("プログラムを閉じる");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitMenuItemActionPerformed(evt);
             }
         });
+        
         fileMenu.add(exitMenuItem);
 
         mainMenu.add(fileMenu);
@@ -284,6 +340,7 @@ public class Anagrams extends JFrame {
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         new About(this).setVisible(true);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
+    
 
     private void nextTrialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextTrialActionPerformed
         wordIdx = (wordIdx + 1) % wordLibrary.getSize();
@@ -297,18 +354,22 @@ public class Anagrams extends JFrame {
     }//GEN-LAST:event_nextTrialActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
+    	new Exit(this).setVisible(true);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void guessedWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessedWordActionPerformed
         if (wordLibrary.isCorrect(wordIdx, guessedWord.getText())){
             //feedbackLabel.setText("Correct! Try a new word!");
             feedbackLabel.setText("正解！ 次の問題へ！");
+            feedbackAnswerLabel.setText(feedbackAnswerLabel.getText()+"○ ");
             getRootPane().setDefaultButton(nextTrial);
+            seikai = true;
         } else {
             //feedbackLabel.setText("Incorrect! Try again!");
             feedbackLabel.setText("不正解！ もう一回やってみよう！");
+            feedbackAnswerLabel.setText(feedbackAnswerLabel.getText()+"× ");
             guessedWord.setText("");
+            seikai = false;
         }
 
         guessedWord.requestFocusInWindow();
@@ -319,6 +380,7 @@ public class Anagrams extends JFrame {
     	feedbackLabel.setText(wordLibrary.getWord(wordIdx));
         guessedWord.requestFocusInWindow();
     }
+
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
         System.exit(0);
     }//GEN-LAST:event_exitForm
@@ -327,7 +389,9 @@ public class Anagrams extends JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.JLabel feedbackAnswerLabel;
     private javax.swing.JLabel feedbackLabel;
+    private javax.swing.JLabel decorationText;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton guessButton;
     private javax.swing.JLabel guessLabel;
