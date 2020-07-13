@@ -352,7 +352,7 @@ public class Anagrams extends JFrame {
     }//GEN-LAST:event_nextTrialActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
+    	new Exit(this).setVisible(true);	
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void guessedWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessedWordActionPerformed
